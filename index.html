@@ -157,7 +157,7 @@
             questions.forEach((question, index) => {
                 answers += question + '\n';
                 options[index].forEach(option => {
-                    const selected = formData.get(`q${index + 1}`) === option ? ' ✔️' : '';
+                    const selected = formData.get(`q${index + 1}`) === option ? ' ✅️' : '';
                     answers += `${option}${selected}\n`;
                 });
                 answers += '\n';
@@ -167,7 +167,7 @@
         }
 
         function downloadAnswers(answers) {
-            const blob = new Blob([answers], { type: 'text/plain' });
+            const blob = new Blob([answers], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
