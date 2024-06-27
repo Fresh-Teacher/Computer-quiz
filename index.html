@@ -127,11 +127,42 @@
     <script>
         function submitQuiz() {
             const form = document.getElementById('quizForm');
+            const questions = [
+                "1. What is the brain of the computer called?",
+                "2. What part of the computer is used to display images and text?",
+                "3. What is the main storage device called?",
+                "4. What part of the computer allows you to input letters and numbers?",
+                "5. What is used to move the cursor on the screen?",
+                "6. What part of the computer allows you to connect to the internet?",
+                "7. What is the main circuit board in the computer called?",
+                "8. What part of the computer cools the CPU?",
+                "9. What part of the computer is used to store temporary data?",
+                "10. What is used to hear sound from the computer?"
+            ];
+            const options = [
+                ["CPU", "GPU", "RAM", "HDD"],
+                ["Monitor", "Mouse", "Keyboard", "Speakers"],
+                ["HDD", "RAM", "CPU", "Monitor"],
+                ["Keyboard", "Mouse", "Monitor", "Printer"],
+                ["Mouse", "Keyboard", "Monitor", "Speakers"],
+                ["Network Card", "Sound Card", "Mouse", "Keyboard"],
+                ["Motherboard", "CPU", "RAM", "GPU"],
+                ["CPU Cooler", "GPU", "RAM", "Power Supply"],
+                ["RAM", "HDD", "Monitor", "Keyboard"],
+                ["Speakers", "Monitor", "Keyboard", "Mouse"]
+            ];
             const formData = new FormData(form);
             let answers = '';
-            for (let [key, value] of formData.entries()) {
-                answers += `${key}: ${value}\n`;
-            }
+
+            questions.forEach((question, index) => {
+                answers += question + '\n';
+                options[index].forEach(option => {
+                    const selected = formData.get(`q${index + 1}`) === option ? ' ✔️' : '';
+                    answers += `${option}${selected}\n`;
+                });
+                answers += '\n';
+            });
+
             downloadAnswers(answers);
         }
 
